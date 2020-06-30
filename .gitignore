@@ -2,7 +2,7 @@ node_modules/
 .env
 /client/.env
 /client/node_modules/
-/client/public/upload
+
 /server/.gitignore
 client/.gitignore
 dev.js
