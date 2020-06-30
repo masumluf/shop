@@ -1,3 +1,3 @@
-model.exports={
-    mongoURL:process.env.MONGO_URL
-}
+module.exports = {
+  mongoURL: process.env.MONGO_URL,
+};

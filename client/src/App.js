@@ -1,15 +1,13 @@
-import React from 'react';
-import Layout from './components/Layout'
+import React from "react";
+import Display from "./components/display";
 
-const App=()=> {
-        return (
-            <Layout>
-            < div > < h1 > Hello
-        React < /h1></
-        div >
-            </Layout>
-    )
-        ;
-    }
+const App = () => {
+  return (
+    <div>
+      {" "}
+      <Display />
+    </div>
+  );
+};
 
 export default App;

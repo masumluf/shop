@@ -1,14 +1,14 @@
-import React from 'react';
-import Layout from "../../Layout";
+import React, { useState } from "react";
+import Navbar from "./Navbar";
+import Sidebar from "./Sidebar";
 
 const Profile = () => {
-
-    return(
-        <Layout>
-            <h1>Private page</h1>
-        </Layout>
-    )
-
-}
+  return (
+    <>
+      <Navbar />
+      <Sidebar />
+    </>
+  );
+};
 
 export default Profile;
