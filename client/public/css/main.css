@@ -245,7 +245,7 @@ card-body.align-self-center.d-flex.flex-column.flex-md-row.justify-content-betwe
 
 .s-sidebar__trigger > i {
   display: inline-block;
-  margin: 1em 0 0 0.8em;
+  margin: 1em 0.2em 0.2em -0.5em;
   color: rgba(10, 10, 10, 0.9);
 }
 
