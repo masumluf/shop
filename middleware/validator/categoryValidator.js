@@ -1,7 +1,7 @@
 const { body } = require("express-validator");
 
 module.exports.categoryValidator = [
-  body("text")
+  body("categoryName")
     .isLength({
       min: 2,
       max: 20,

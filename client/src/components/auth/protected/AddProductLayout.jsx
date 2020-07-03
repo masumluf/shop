@@ -101,10 +101,16 @@ const AddProductLayout = () => {
                       value={category}
                       id='namemarchent'>
                       {categories.map((c) => {
-                        return <option value={c.text}>{c.text}</option>;
+                        return (
+                          <option value={c.categoryName}>
+                            {c.categoryName}
+                          </option>
+                        );
                       })}
                     </select>
-                    <div className=' invalid-feedback'>{error.phone}</div>
+                    <div className=' invalid-feedback'>
+                      {error.categoryName}
+                    </div>
                     <span>Select Category</span>
                   </label>
                   <label className='form-group has-float-label mb-4'>

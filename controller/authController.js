@@ -378,3 +378,37 @@ exports.orderPlacess = async (req, res, next) => {
     return res.status(433).json();
   }
 };
+
+exports.orderSearch = async (req, res, next) => {
+  let { sDate, eDate } = req.body;
+  console.log(sDate);
+  console.log(eDate);
+  try {
+    const result = await Orderlink.find({
+      createdAt: {
+        $gte: sDate,
+        $lte: eDate,
+      },
+    });
+    return res.status(200).json(result);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+exports.profitSearch = async (req, res, next) => {
+  let { sDate, eDate } = req.body;
+
+  try {
+    const result = await Orderlink.find({
+      status: "delivered",
+      createdAt: {
+        $gte: sDate,
+        $lte: eDate,
+      },
+    }).select("price");
+    return res.status(200).json(result);
+  } catch (e) {
+    console.log(e);
+  }
+};

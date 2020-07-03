@@ -182,12 +182,36 @@ exports.orderDetail = async (req, res, next) => {
   const id = req.params.id;
 
   try {
+    let orderDetails = await Orderlink.findOne({ _id: id });
     let products = await Order.find({ orderlink: id }).populate({
       path: "product",
       select: "title _id description photo",
     });
-    res.status(200).json(products);
+    res.status(200).json({ products, orderDetails });
   } catch (e) {
     console.log(e);
+  }
+};
+
+exports.updateStatus = async (req, res, next) => {
+  let { _id, stats } = req.body;
+
+  console.log(_id, stats);
+  let updatedRecord = {
+    status: stats,
+  };
+  try {
+    let product = await Orderlink.findByIdAndUpdate(
+      _id,
+      { $set: updatedRecord },
+      { new: true }
+    );
+
+    if (product) {
+      return res.status(200);
+    }
+  } catch (e) {
+    console.log(e);
+    return res.status(422);
   }
 };

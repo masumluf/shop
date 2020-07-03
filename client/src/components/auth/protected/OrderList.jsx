@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
-import { useSelector } from "react-redux";
+import { updateProduct } from "../../../class/helper";
+import { useSelector, useDispatch } from "react-redux";
 
 // import JsBarcode from "jsbarcode";
 // import canvg from "canvg";
 
 const ProductMap = ({ _id, orderId, status, price, createdAt }) => {
+  const dispatch = useDispatch();
   const [success, setSuccess] = useState({});
   const [error, setError] = useState({});
   // const removePayment = (id) => {
@@ -49,10 +51,43 @@ const ProductMap = ({ _id, orderId, status, price, createdAt }) => {
 
             <p className='list-item-heading mb-0 truncate w-xs-100 field-name-g'>
               Status:
-              <span className='badge badge-pill badge-outline-theme-2 mb-1'>
+              <span
+                className={
+                  status === "pending"
+                    ? "btn btn-info default mb-1"
+                    : status === "delivered"
+                    ? "btn btn-success default mb-1"
+                    : "btn btn-danger default mb-1"
+                }>
                 {status}
               </span>
             </p>
+            {status === "pending" && (
+              <>
+                <p
+                  className='list-item-heading mb-0 truncate w-xs-100 field-name-g'
+                  onClick={() => {
+                    dispatch({ type: "REFRESH", payload: Date.now() });
+                  }}>
+                  <button
+                    className='btn btn-success mb-1'
+                    onClick={() => updateProduct(_id, "delivered")}>
+                    Delivered
+                  </button>
+                </p>
+                <p
+                  className='list-item-heading mb-0 truncate w-xs-100 field-name-g'
+                  onClick={() => {
+                    dispatch({ type: "REFRESH", payload: Date.now() });
+                  }}>
+                  <button
+                    className='btn btn-danger mb-1'
+                    onClick={() => updateProduct(_id, "cancelled")}>
+                    Cancelled
+                  </button>
+                </p>
+              </>
+            )}
             <p className='list-item-heading mb-0 truncate w-xs-100 field-name-g'>
               {" "}
               Total

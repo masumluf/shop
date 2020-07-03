@@ -102,19 +102,6 @@ export const Dashboard = () => {
               </div>
             </div>
           </div>
-
-          <div className='col-xl-12 col-lg-12 mb-4'>
-            <div className='card'>
-              <div className='card-body'>
-                <h5 className='card-title'>Recent Payments History</h5>
-                <div className='scroll dashboard-list-with-thumbs ps ps--active-y'>
-                  {orders.map((order) => (
-                    <OrderCard {...order} />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </main>
     </>

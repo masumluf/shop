@@ -17,6 +17,7 @@ import Home from "./components/auth/protected/Home";
 import AddProduct from "./components/auth/protected/AddProduct";
 import Order from "./components/auth/protected/Order";
 import OrderDetails from "./components/auth/protected/OrderDetails";
+import Profit from "./components/auth/protected/Profit";
 import Product from "./components/auth/protected/Products";
 import Dashboard from "./components/auth/protected/Dashboard";
 import Category from "./components/auth/protected/Category";
@@ -38,6 +39,7 @@ const Routes = () => {
         <Route path='/itemdetails/:id' component={ItemDetails} />
         <Route path='/signin' component={Signin} />
         <Route path='/checkout' component={Cart} />
+        <AdminRoute path='/profit' Component={Profit} />
         <AdminRoute path='/orderdetails/:id' Component={OrderDetails} />
         <AdminRoute path='/order' Component={Order} />
         <AdminRoute path='/allproduct' Component={Product} />

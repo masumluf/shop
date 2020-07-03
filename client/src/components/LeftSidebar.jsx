@@ -24,32 +24,34 @@ const LeftSidebar = () => {
   };
 
   return (
-    <div className='card'>
-      <div className='card-body'>
-        <h5 className='card-title'>Category</h5>
+    <>
+      <div className='menu' style={{ opacity: 1 }}>
+        <div className='s-layout__sidebar'>
+          <a className='s-sidebar__trigger' href='#0'>
+            <i className='simple-icon-menu'></i>
+          </a>
 
-        <div className='scroll dashboard-list-with-user ps ps--active-y'>
-          <div className='d-flex flex-row mb-3 pb-3 border-bottom'>
-            <div className='pl-3'>
-              <a href='#' onClick={refreshProduct}>
-                <p className='font-weight-medium mb-0 '>ALL</p>
-              </a>
-            </div>
-          </div>
-          {category.map((c) => {
-            return (
-              <div className='d-flex flex-row mb-3 pb-3 border-bottom'>
-                <div className='pl-3'>
-                  <a href='#' onClick={() => filterProduct(c.text)}>
-                    <p className='font-weight-medium mb-0 '>{c.text}</p>
-                  </a>
-                </div>
-              </div>
-            );
-          })}
+          <nav className='s-sidebar__nav'>
+            <ul className='list-unstyled' id='myUL'>
+              <li>
+                <a href='#' onClick={refreshProduct}>
+                  <p className='font-weight-medium mb-0 '>ALL</p>
+                </a>
+              </li>
+              {category.map((c) => {
+                return (
+                  <li>
+                    <a href='#' onClick={() => filterProduct(c.categoryName)}>
+                      <span>{c.categoryName}</span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

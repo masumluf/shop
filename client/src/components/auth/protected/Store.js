@@ -11,6 +11,7 @@ const init = {
   cartItems: [],
   orders: [],
   orderList: [],
+  profits: [],
   refresh: "",
 };
 
@@ -50,6 +51,11 @@ const reducer = (state = init, action) => {
       return {
         ...state,
         refresh: action.payload,
+      };
+    case "SET_PROFIT":
+      return {
+        ...state,
+        profits: action.payload,
       };
 
     default:

@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 
 import { useParams } from "react-router-dom";
 import OrderDetailsLoop from "./OrderDetailsLoop";
+import { invoice } from "../../../class/helper";
 import { Navbar } from "./Navbar";
 import Sidebar from "./Sidebar";
 
 const Display = () => {
   const { id } = useParams();
   const [products, setProducts] = useState([]);
+  const [order, setOrder] = useState({});
 
   const fetchData = (orderId) =>
     fetch(
@@ -15,8 +17,9 @@ const Display = () => {
     ).then((res) => res.json());
   useEffect(() => {
     (async () => {
-      const product = await fetchData(id);
-      setProducts(product);
+      const { products, orderDetails } = await fetchData(id);
+      setProducts(products);
+      setOrder(orderDetails);
     })();
   }, [id]);
   return (
@@ -30,22 +33,37 @@ const Display = () => {
               <div className='mb-1'>
                 <h1>Product Details</h1>
 
-                <div className='mb-1'>
-                  <a
-                    className='btn pt-0 pl-0 d-inline-block d-md-none'
-                    data-toggle='collapse'
-                    href='#displayOptions'
-                    role='button'
-                    aria-expanded='true'
-                    aria-controls='displayOptions'>
-                    Display Options
-                    <i className='simple-icon-arrow-down align-middle'></i>
-                  </a>
-                  <div className='collapse d-md-block' id='displayOptions'>
-                    <div className='d-block d-md-inline-block'></div>
+                <div className='separator mb-5'></div>
+              </div>
+            </div>
+            <div className='col-xl-12 col-lg-12 mb-4'>
+              <div className='mb-1'>
+                <div className='card'>
+                  <div className='card-body'>
+                    <p>
+                      <strong>
+                        Receiver Number :
+                        <i className='text-info'>{order.number}</i>
+                      </strong>
+                    </p>
+                    <p>
+                      <strong>Receiver Address : {order.address}</strong>
+                    </p>
+                    <p>
+                      <strong>Total Amount : {order.price}</strong>
+                    </p>
+                    <p>
+                      <button
+                        onClick={() => {
+                          invoice(order, products);
+                        }}
+                        className='btn btn-danger mb-1'>
+                        {" "}
+                        <i className='iconsminds-file'></i>Download Invoice
+                      </button>
+                    </p>
                   </div>
                 </div>
-                <div className='separator mb-5'></div>
               </div>
             </div>
           </div>

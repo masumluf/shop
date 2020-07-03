@@ -2,6 +2,8 @@ import axios from "axios";
 import { getCookie } from "./storage";
 import { toast } from "react-toastify";
 import { values } from "lodash";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 const dotenv = require("dotenv");
 const dotenvExpand = require("dotenv-expand");
@@ -186,4 +188,114 @@ export const getAllOrders = async () => {
   } catch (e) {
     return e.response.data.error;
   }
+};
+
+export const updateProduct = async (_id, stats) => {
+  try {
+    let result = await axios({
+      method: "PUT",
+      url: `${process.env.REACT_APP_API_URL}/updateproductstatus`,
+      data: {
+        _id,
+        stats,
+      },
+    });
+
+    if (result) {
+      return result.data.message;
+    }
+  } catch (e) {
+    return e.response.data.error;
+  }
+};
+
+export const invoice = (orders, products) => {
+  const doc = new jsPDF();
+  let today = new Date();
+  let dd = today.getDate();
+
+  let mm = today.getMonth() + 1;
+  let yyyy = today.getFullYear();
+
+  let title = [];
+  let quant = [];
+  let prices = [];
+  let col = ["Product Name", "Quantity", "Price"];
+  let temp;
+
+  products.map((p) => {
+    temp = [p.product.title, p.quantity, p.price * p.quantity];
+    title.push(temp);
+  });
+  //cartItems.reduce((sum, current) => sum + current.price * current.quantity, 0);
+
+  const totalAmount = products.reduce(
+    (sum, current) => sum + current.quantity * current.price,
+    0,
+  );
+
+  // It can parse html:
+  // <table id="my-table"><!-- ... --></table>
+  doc.autoTable({ html: "#my-table" });
+
+  doc.autoTable({
+    body: [[process.env.COMPANY_NAME, "", "", ""]],
+  });
+
+  // Or use javascript directly:
+  doc.autoTable({
+    body: [
+      ["Recevier Information :", "", "", "Order ID #"],
+      ["Receiver Address and Phone Number", "", "", ""],
+      [orders.address, "", "", orders.orderId],
+      [orders.number, "", "", dd + "/" + mm + "/" + yyyy],
+    ],
+    theme: "grid",
+  });
+
+  doc.autoTable(col, title, { theme: "grid" });
+
+  doc.autoTable({
+    body: [["Total Amount", totalAmount]],
+    theme: "grid",
+  });
+
+  // doc.autoTable({
+  //   body: [
+  //     ["Product Name :", "", "Quantity", "Price"],
+
+  //   ],
+  //   theme: "grid",
+  // });
+
+  // doc.autoTable({
+  //   body: [["", "", "", ""]],
+  // });
+
+  // doc.autoTable({
+  //   body: [
+  //     ["Marchent Information :"],
+  //     [marchent.name],
+  //     [marchent.address],
+  //     [marchent.phone],
+  //   ],
+  //   theme: "plain",
+  // });
+
+  // doc.autoTable({
+  //   body: [["", "", "", ""]],
+  // });
+
+  // doc.autoTable({
+  //   head: [["Product Description", "", "", "Amount"]],
+  //   body: [
+  //     [description, "", "", amount],
+
+  //     ["Delivery Charge", "", "", cost],
+  //     ["Total Bill", "", "", cost + amount],
+  //   ],
+  //   theme: "grid",
+  // });
+
+  doc.save("Order.pdf");
 };

@@ -18,11 +18,11 @@ const AddCategoryLayout = () => {
 
   const { activeItem } = state;
   const [values, setValues] = useState({
-    text: "",
+    categoryName: "",
     buttonText: "Save",
   });
 
-  const { text, buttonText } = values;
+  const { categoryName, buttonText } = values;
 
   const handleChange = (name) => (e) => {
     setValues({ ...values, [name]: e.target.value });
@@ -36,13 +36,13 @@ const AddCategoryLayout = () => {
       let result = await axios({
         method: "POST",
         url: `${process.env.REACT_APP_API_URL}/addcategory`,
-        data: { text },
+        data: { categoryName },
       });
       if (result) {
         //console.log(result)
         toast.success("Category Added Successfully.");
         setError({});
-        setValues({ ...values, buttonText: "Save", text: "" });
+        setValues({ ...values, buttonText: "Save", categoryName: "" });
       }
     } catch (e) {
       //console.log(e.response.data.error);
@@ -63,13 +63,15 @@ const AddCategoryLayout = () => {
                 <label className='form-group has-float-label mb-4'>
                   <input
                     className={
-                      error.text ? " form-control is-invalid" : " form-control"
+                      error.categoryName
+                        ? " form-control is-invalid"
+                        : " form-control"
                     }
                     type='text'
-                    onChange={handleChange("text")}
-                    value={text}
+                    onChange={handleChange("categoryName")}
+                    value={categoryName}
                   />
-                  <div className='invalid-feedback'>{error.text}</div>
+                  <div className='invalid-feedback'>{error.categoryName}</div>
                   <span>Category Name</span>
                 </label>
 

@@ -9,6 +9,7 @@ const {
   singleProduct,
   getAllOrder,
   orderDetail,
+  updateStatus,
 } = require("../controller/productController");
 
 const {
@@ -17,6 +18,9 @@ const {
 
 router.post("/addproduct", addProduct);
 router.put("/updateproduct", updateProduct);
+
+router.put("/updateproductstatus", updateStatus);
+
 router.get("/getallproduct", getAllProduct);
 router.get("/products", searchProduct);
 

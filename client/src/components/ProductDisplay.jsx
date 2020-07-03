@@ -10,7 +10,7 @@ const ProductDisplay = ({
   addItemToCart,
 }) => {
   return (
-    <div className='col-xl-3 col-lg-4 col-12 col-sm-6 mb-4'>
+    <div className='col-xl-3 col-lg-4 col-12 col-sm-4 mb-4'>
       <div className='card'>
         <div className='position-relative'>
           <img

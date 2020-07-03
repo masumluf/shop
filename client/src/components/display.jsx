@@ -29,9 +29,6 @@ const Display = () => {
                 ))}
               </div>
             </div>
-            <div className='col-2'>
-              <RightSidebar />
-            </div>
           </div>
         </div>
       </main>

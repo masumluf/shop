@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 
 const ProductSearch = ({ refreshProducts }) => {
-  const { orderList } = useSelector((state) => state);
   const dispatch = useDispatch();
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
@@ -32,16 +31,14 @@ const ProductSearch = ({ refreshProducts }) => {
     const sDate = moment(item1).format("YYYY-MM-DD") + "T00:00:00.000Z";
     const eDate = moment(item2).format("YYYY-MM-DD") + "T23:59:59.000Z";
 
-    console.log(sDate);
-
     try {
       let result = await axios({
         method: "POST",
-        url: `${process.env.REACT_APP_API_URL}/ordersearch`,
+        url: `${process.env.REACT_APP_API_URL}/profit`,
         data: { sDate, eDate },
       });
       if (result) {
-        dispatch({ type: "SET_ORDERLIST", payload: result.data });
+        dispatch({ type: "SET_PROFIT", payload: result.data });
         //console.log(result.data);
       }
     } catch (error) {
@@ -58,24 +55,11 @@ const ProductSearch = ({ refreshProducts }) => {
       <div className='col-12 col-xl-12 mb-2'>
         <div className='card h-100'>
           <div className='card-body'>
-            <h1>Order List</h1>
+            <h1>Profit Analysis</h1>
 
             <br />
             <br />
-            <nav
-              className='breadcrumb-container d-none d-sm-block d-lg-inline-block'
-              aria-label='breadcrumb'>
-              <ol className='breadcrumb pt-0'>
-                <li className='breadcrumb-item'>
-                  <a href='#'>Home</a>
-                </li>
-                <li className='breadcrumb-item'>
-                  <a href='#' onClick={refreshClick}>
-                    Refresh
-                  </a>
-                </li>
-              </ol>
-            </nav>
+
             {/* <div className='form-group mb-3'>
               <label>
                 <strong className='text-info'>Search By Phone Number</strong>

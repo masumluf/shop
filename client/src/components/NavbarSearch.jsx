@@ -47,6 +47,9 @@ const NavbarSearch = () => {
                 <span className='badge badge-light'>{cartItems.length}</span>
               )}
             </Link>
+            <Link to='/signin'>
+              <span className='badge badge-light'>Signin</span>
+            </Link>
           </div>
         </div>
       </nav>

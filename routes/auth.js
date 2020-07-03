@@ -6,6 +6,8 @@ const {
   loginPost,
   dashboardController,
   orderPlace,
+  orderSearch,
+  profitSearch,
 } = require("../controller/authController");
 
 const {
@@ -21,6 +23,10 @@ router.post("/login", loginValidator, loginPost);
 
 router.post("/placeorder", orderPlace);
 
+router.post("/ordersearch", orderSearch);
+
 router.get("/dashboard", dashboardController);
+
+router.post("/profit", profitSearch);
 
 module.exports = router;

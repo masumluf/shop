@@ -32,14 +32,14 @@ const LayoutView = ({ match }) => {
 
               <li>
                 <Link to='/order'>
-                  <i className='iconsminds-network'></i> Order
+                  <i className='simple-icon-basket-loaded'></i> Order
                 </Link>
               </li>
 
               {isAuth().role === "admin" && (
                 <li>
-                  <Link to='/addproduct'>
-                    <i className='iconsminds-engineering'></i> Add Product
+                  <Link to='/profit'>
+                    <i className='iconsminds-line-chart-1'></i> Profit
                   </Link>
                 </li>
               )}
@@ -53,61 +53,10 @@ const LayoutView = ({ match }) => {
               )}
 
               <li>
-                <Link to='/payment'>
-                  <i className='iconsminds-financial'></i> Payment
+                <Link to='/addcategory'>
+                  <i className='iconsminds-check'></i> Category
                 </Link>
               </li>
-
-              {isAuth().role === "super" && (
-                <li>
-                  <Link to='/sreport'>
-                    <i className='simple-icon-chart'></i> Admin Payment
-                  </Link>
-                </li>
-              )}
-
-              {isAuth().role === "super" && (
-                <>
-                  {" "}
-                  <li>
-                    <Link to='/addcompany'>
-                      <i className='iconsminds-administrator'></i> Add Admin
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to='/adminlist'>
-                      <i className='iconsminds-check'></i> Admin List
-                    </Link>
-                  </li>
-                </>
-              )}
-
-              {isAuth().role === "super" && (
-                <li>
-                  <Link to='/sreport'>
-                    <i className='iconsminds-bar-chart-4'></i> Admin Report
-                  </Link>
-                </li>
-              )}
-
-              {isAuth().role === "admin" && (
-                <>
-                  <li>
-                    <Link to='/adminpassword'>
-                      <i className='iconsminds-arrow-inside-gap-45'></i>
-                      Password
-                    </Link>
-                  </li>
-                </>
-              )}
-
-              {isAuth().role === "admin" && (
-                <li>
-                  <Link to='/addcategory'>
-                    <i className='iconsminds-line-chart-1'></i> Category
-                  </Link>
-                </li>
-              )}
             </ul>
           </nav>
         </div>

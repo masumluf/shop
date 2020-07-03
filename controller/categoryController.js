@@ -5,7 +5,9 @@ const { validationResult } = require("express-validator");
 const errorFormat = require("../utils/validationErrorFormatter");
 
 exports.addCategory = async (req, res, next) => {
-  let { text } = req.body;
+  let { categoryName } = req.body;
+
+  console.log(categoryName);
 
   let errorResult = validationResult(req).formatWith(errorFormat);
 
@@ -15,7 +17,7 @@ exports.addCategory = async (req, res, next) => {
     });
   }
   try {
-    const category = new Category({ text });
+    const category = new Category({ categoryName });
 
     const userSavingResult = await category.save();
 
@@ -34,7 +36,7 @@ exports.addCategory = async (req, res, next) => {
 
 exports.allCategory = async (req, res, next) => {
   try {
-    let category = await Category.find({}).select("text");
+    let category = await Category.find({}).select("categoryName");
     return res.status(200).json({
       category,
     });
